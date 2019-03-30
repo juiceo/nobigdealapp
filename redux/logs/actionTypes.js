@@ -1,0 +1,1 @@
+export const SAVE_NEW_LOG = 'logs/SAVE_NEW_LOG';
