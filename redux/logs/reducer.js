@@ -20,6 +20,9 @@ export default function reducer(state = initialState, action) {
 				logs: _.concat(state.logs, newLog)
 			}
 		}
+		case 'RESET_STORE': {
+			return initialState;
+		}
 		default: return state
 	}
 }

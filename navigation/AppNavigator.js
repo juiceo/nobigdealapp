@@ -3,16 +3,21 @@ import { createAppContainer, createSwitchNavigator, createStackNavigator } from 
 
 import MainTabNavigator from './MainTabNavigator';
 import NewActivityHome from '../screens/NewActivityScreens/NewActivityHome';
+import NewActivityWarning from '../screens/NewActivityScreens/NewActivityWarning';
 import NewActivityDone from '../screens/NewActivityScreens/NewActivityDone';
 import CheckUpHome from '../screens/CheckUpScreens/CheckUpHome';
-import CheckUpChlamydia from '../screens/CheckUpScreens/CheckUpChlamydia';
-import CheckUpUrinate from '../screens/CheckUpScreens/CheckUpUrinate';
+import CheckUpDiagnosis from '../screens/CheckUpScreens/CheckUpDiagnosis';
 import CheckUpDone from '../screens/CheckUpScreens/CheckUpDone';
+import CheckUpSymptoms from '../screens/CheckUpScreens/CheckUpSymptoms';
+import CheckUpSymptomsTwo from '../screens/CheckUpScreens/CheckUpSymptomsTwo';
 import LatestDiagnosisScreen from '../screens/LatestDiagnosis';
+import LoadingScreen from '../screens/LoadingScreen';
 
 const NewActivityStack = createStackNavigator({
   NewActivityHome: NewActivityHome,
-  NewActivityDone: NewActivityDone
+  NewActivityDone: NewActivityDone,
+  NewActivityWarning: NewActivityWarning,
+  NewActivityOrder: LoadingScreen,
 }, {
     headerMode: 'none',
     initialRouteName: 'NewActivityHome',
@@ -21,9 +26,11 @@ const NewActivityStack = createStackNavigator({
 
 const CheckUpStack = createStackNavigator({
   CheckUpHome: CheckUpHome,
-  CheckUpChlamydia: CheckUpChlamydia,
-  CheckUpUrinate: CheckUpUrinate,
+  CheckUpDiagnosis: CheckUpDiagnosis,
   CheckUpDone: CheckUpDone,
+  CheckUpSymptoms: CheckUpSymptoms,
+  CheckUpSymptomsTwo: CheckUpSymptomsTwo,
+  CheckUpBooking: LoadingScreen,
 }, {
     headerMode: 'none',
     initialRouteName: 'CheckUpHome',

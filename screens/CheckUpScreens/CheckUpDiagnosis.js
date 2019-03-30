@@ -10,12 +10,25 @@ import Spacer from '../../components/Spacer'
 import ScreenTitle from '../../components/ScreenTitle'
 import Button from '../../components/Button'
 import StyledText from '../../components/StyledText'
+import { setAppointmenBooked } from '../../redux/digime/actions';
+import { connect } from 'react-redux';
 
-export default CheckUpScreenChlamydia = (props) => {
+const CheckUpScreenDiagnosis = (props) => {
 
 	function dismiss() {
 		props.navigation.dismiss()
 	}
+
+	function bookingScreen() {
+		props.setAppointmenBooked()
+		props.navigation.navigate('CheckUpBooking', {
+			loadingText: 'Booking appointment',
+			doneText: 'Appointment booked!',
+			doneSubtitle: "You'll get a notification a day before your appointment."
+		})
+	}
+
+	const { diagnosis } = props.navigation.state.params
 
 	return (
 		<Container>
@@ -27,7 +40,7 @@ export default CheckUpScreenChlamydia = (props) => {
 					<Spacer size={106} />
 					<StyledText text="You may have" size="med" color={Colors.white} />
 					<Spacer size={10} />
-					<StyledText text="Chlamydia" size="large" color={Colors.white} />
+					<StyledText text={diagnosis} size="large" color={Colors.white} />
 					<Spacer size={20} />
 					<StyledText text="Just to be sure:" size="med" color={Colors.cyan} />
 					<Spacer size={20} />
@@ -41,7 +54,7 @@ export default CheckUpScreenChlamydia = (props) => {
 						<View style={s.buttonRow}>
 							<Button fullWidth type="border" text="See other times"></Button>
 							<Spacer size={10} />
-							<Button fullWidth text="Book"></Button>
+							<Button fullWidth text="Book" onPress={bookingScreen}></Button>
 						</View>
 					</View>
 					<Spacer size={20} />
@@ -73,3 +86,13 @@ const s = StyleSheet.create({
 		borderRadius: 5,
 	}
 })
+
+const mapStateToProps = (state) => ({
+
+})
+
+const mapDispatchToProps = (dispatch) => ({
+	setAppointmenBooked: () => dispatch(setAppointmenBooked())
+})
+
+export default connect(mapStateToProps, mapDispatchToProps)(CheckUpScreenDiagnosis)

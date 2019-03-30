@@ -21,7 +21,8 @@ class NewActivityHome extends React.Component {
 			condomUsed: null,
 			birthControl: null,
 			phoneNumber: '',
-			types: []
+			types: [],
+			under72hrs: null,
 		}
 
 		this.onSubmit = this.onSubmit.bind(this)
@@ -29,10 +30,21 @@ class NewActivityHome extends React.Component {
 
 	onSubmit() {
 		this.props.saveNewLog(_.pick(this.state, ['condomUsed', 'birthControl', 'types', 'phoneNumber']));
-		this.props.navigation.navigate('NewActivityDone')
+
+		if (this.state.condomUsed !== 'yes' && this.state.birthControl !== 'yes') {
+			this.props.navigation.navigate('NewActivityWarning')
+		} else {
+			this.props.navigation.navigate('NewActivityDone')
+		}
 	}
 
 	render() {
+
+		const { condomUsed, birthControl, types } = this.state;
+
+		const showUnder72Hrs = condomUsed && condomUsed !== 'yes' && birthControl && birthControl !== 'yes';
+
+		const buttonDisabled = !condomUsed || !birthControl || types.length === 0
 
 		return (
 			<Container style={s.wrapper}>
@@ -83,6 +95,26 @@ class NewActivityHome extends React.Component {
 							}
 						]}
 					/>
+					{showUnder72Hrs ? (
+						<React.Fragment>
+							<Spacer size={40} />
+							<TextRadioButtons
+								question="Was it under 72 hours ago?"
+								selectedValue={this.state.under72hrs}
+								onChange={(value) => this.setState({ under72hrs: value })}
+								options={[
+									{
+										label: 'Yes',
+										value: 'yes'
+									},
+									{
+										label: 'No',
+										value: 'no'
+									}
+								]}
+							/>
+						</React.Fragment>
+					) : null}
 					<Spacer size={40} />
 					<TextRadioButtons
 						question="What kind of sex did you have?"
@@ -114,7 +146,7 @@ class NewActivityHome extends React.Component {
 					<Spacer size={5} />
 					<StyledText size="xsmall" text="Save their phone number so you can (anonymously) contact them later via the app, if need be." align="left" />
 					<Spacer size={40} />
-					<Button text="Save" onPress={this.onSubmit} />
+					<Button text="Save" onPress={this.onSubmit} disabled={buttonDisabled} />
 					<Spacer size={40} />
 				</Content>
 			</Container>

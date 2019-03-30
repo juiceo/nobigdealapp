@@ -7,11 +7,16 @@ import {
   Text,
   TouchableOpacity,
   View,
+  ActivityIndicator
 } from 'react-native';
 
 import { Container, Content } from 'native-base'
+import { connect } from 'react-redux';
 import Colors from '../constants/Colors'
 import { LinearGradient } from 'expo';
+
+import * as DigimeActions from '../redux/digime/actions';
+import * as Actions from '../redux/actions';
 
 import StyledText from '../components/StyledText'
 import ScreenTitle from '../components/ScreenTitle';
@@ -20,7 +25,7 @@ import Button from '../components/Button';
 
 import send from '../services/TwilioService';
 
-export default class HomeScreen extends React.Component {
+class HomeScreen extends React.Component {
   static navigationOptions = {
     header: null,
   };
@@ -29,7 +34,7 @@ export default class HomeScreen extends React.Component {
     super(props)
 
     this.state = {
-      connected: false,
+      digimeLoading: false,
     }
 
     this.newActivity = this.newActivity.bind(this)
@@ -47,7 +52,34 @@ export default class HomeScreen extends React.Component {
     this.props.navigation.navigate('LatestDiagnosis', { disease: 'Chlamydia' })
   }
 
+  connectDigime = () => {
+    this.setState({
+      digimeLoading: true,
+    });
+
+    setTimeout(function () {
+      this.props.setDigimeConnected();
+      this.setState({
+        digimeLoading: false
+      })
+    }.bind(this), 1500)
+  }
+
   renderConnect() {
+
+    if (this.state.digimeLoading) {
+      return (
+        <React.Fragment>
+          <Spacer size={106} />
+          <View style={s.connectNotice}>
+            <StyledText size="large" color={Colors.blue} text="Authenticating" />
+            <Spacer size={20} />
+            <ActivityIndicator color={Colors.blue} />
+          </View>
+        </React.Fragment>
+      )
+    }
+
     return (
       <React.Fragment>
         <Spacer size={106} />
@@ -56,45 +88,53 @@ export default class HomeScreen extends React.Component {
           <Spacer size={10} />
           <StyledText size="small" text="To import your health records" />
           <Spacer size={20} />
-          <Button text="Connect" onPress={() => this.setState({ connected: true })} />
+          <Button text="Connect" onPress={this.connectDigime} />
         </View>
       </React.Fragment >
     )
   }
 
   renderNormal() {
+
+    const { testResults, appointmentBooked, prescriptionAvailable } = this.props;
+
+    const fitbitData = true
+
     return (
       <React.Fragment>
         <Spacer size={20} />
-        <View style={s.card}>
-          <View style={s.cardItem}>
-            <View style={s.cardItemLeft}>
-              <StyledText text="Test Results" size="xsmall" color={Colors.purple} align="left" />
-            </View>
-            <View style={s.cardItemRight}>
-              <StyledText text="Results are in" size="small" align="left" />
-            </View>
+        {fitbitData ? (
+          <View>
+            <StyledText text="fitbit data here" />
           </View>
-          <View style={s.cardItem}>
-            <View style={s.cardItemLeft}>
-              <StyledText text="Reminder" size="xsmall" color={Colors.purple} align="left" />
-            </View>
-            <View style={s.cardItemRight}>
-              <StyledText text="Upcoming doctor appointment" size="small" align="left" />
-            </View>
+        ) : null}
+        {testResults || appointmentBooked ? (
+          <View style={s.card}>
+            {this.props.appointmentBooked ? (
+              <View style={s.cardItem}>
+                <View style={s.cardItemLeft}>
+                  <StyledText text="Reminder" size="xsmall" color={Colors.purple} align="left" />
+                </View>
+                <View style={s.cardItemRight}>
+                  <StyledText text="Upcoming doctor appointment" size="small" align="left" />
+                </View>
+              </View>
+            ) : null}
+            {this.props.testResults ? (
+              <View style={s.cardItem}>
+                <View style={s.cardItemLeft}>
+                  <StyledText text="Test Results" size="xsmall" color={Colors.purple} align="left" />
+                </View>
+                <View style={s.cardItemRight}>
+                  <StyledText text="Results are in" size="small" align="left" />
+                </View>
+              </View>
+            ) : null}
           </View>
-          <View style={s.cardItem}>
-            <View style={s.cardItemLeft}>
-              <StyledText text="ePrescription" size="xsmall" color={Colors.purple} align="left" />
-            </View>
-            <View style={s.cardItemRight}>
-              <StyledText text="You have a new eRecipe" size="small" align="left" />
-            </View>
-          </View>
-        </View>
+        ) : null}
         <Spacer size={20} />
         <View style={s.buttonRow}>
-          <TouchableOpacity style={{ flex: 1 }}>
+          <TouchableOpacity style={{ flex: 1 }} onPress={this.checkUp}>
             <View style={s.button}>
               <Image style={s.buttonImage} source={require('../assets/images/group12.png')} />
               <Spacer size={10} />
@@ -151,11 +191,14 @@ export default class HomeScreen extends React.Component {
                 <StyledText text="New entry" size="med" color={Colors.blue} />
               </View>
             </TouchableOpacity>
-            {this.state.connected ? (
+            {this.props.digimeConnected ? (
               this.renderNormal()
             ) : (
                 this.renderConnect()
               )}
+            <Spacer size={300} />
+            <Button type="text" text="Reset demo" onPress={() => this.props.resetStore()} />
+            <Spacer size={60} />
           </Content>
         </LinearGradient>
       </Container>
@@ -216,3 +259,17 @@ const s = StyleSheet.create({
     flexDirection: 'column',
   }
 })
+
+const mapStateToProps = (state) => ({
+  digimeConnected: state.digime.connected,
+  testResults: state.digime.testResults,
+  appointmentBooked: state.digime.appointment,
+  prescriptionAvailable: state.digime.prescription,
+})
+
+const mapDispatchToProps = (dispatch) => ({
+  setDigimeConnected: () => dispatch(DigimeActions.setConnected()),
+  resetStore: () => dispatch(Actions.reset())
+})
+
+export default connect(mapStateToProps, mapDispatchToProps)(HomeScreen)

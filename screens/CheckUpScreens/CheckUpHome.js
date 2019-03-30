@@ -17,8 +17,8 @@ export default CheckUpHome = (props) => {
 		props.navigation.navigate('CheckUpHome')
 	}
 
-	function goToSymptomsUrinate() {
-		props.navigation.navigate('CheckUpUrinate')
+	function goToSymptoms() {
+		props.navigation.navigate('CheckUpSymptoms')
 	}
 
 	return (
@@ -28,7 +28,7 @@ export default CheckUpHome = (props) => {
 			<Spacer size={106}></Spacer>
 			<Button text="Awesome!" fullWidth onPress={goToDone} />
 			<Spacer size={10}></Spacer>
-			<Button text="Not so great" type="border" fullWidth onPress={goToSymptomsUrinate} />
+			<Button text="Not so great" type="border" fullWidth onPress={goToSymptoms} />
 			<Spacer size={40}></Spacer>
 			<Button text="Why are you asking me this?" type="text" fullWidth />
 		</Content>

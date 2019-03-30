@@ -12,10 +12,12 @@ export default class Button extends Component {
 		text: PropTypes.string,
 		fullWidth: PropTypes.bool,
 		type: PropTypes.string,
+		disabled: PropTypes.bool,
 	}
 
 	static defaultProps = {
 		fullWidth: false,
+		disabled: false,
 	}
 
 	render() {
@@ -25,6 +27,7 @@ export default class Button extends Component {
 			s.wrapper,
 			this.props.fullWidth ? s.wrapperFullWidth : null,
 			this.props.type === 'text' ? s.wrapperText : null,
+			this.props.disabled ? s.wrapperDisabled : null,
 		]
 
 		const buttonStyle = [
@@ -37,7 +40,7 @@ export default class Button extends Component {
 
 		return (
 			<View style={wrapperStyle}>
-				<TouchableOpacity style={buttonStyle} onPress={this.props.onPress}>
+				<TouchableOpacity disabled={this.props.disabled} style={buttonStyle} onPress={this.props.onPress}>
 					<StyledText text={this.props.text} color={textColor} size="small" />
 				</TouchableOpacity>
 			</View>
@@ -57,6 +60,9 @@ const s = StyleSheet.create({
 	},
 	wrapperText: {
 		height: 'auto',
+	},
+	wrapperDisabled: {
+		opacity: 0.5,
 	},
 	button: {
 		paddingHorizontal: 40,
