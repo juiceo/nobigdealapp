@@ -3,7 +3,8 @@ import { ScrollView, StyleSheet } from 'react-native';
 import { connect } from 'react-redux';
 import _ from 'lodash'
 import { Container, Content, ListItem, Body, Text } from 'native-base';
-
+import StyledText from '../components/StyledText'
+import Spacer from '../components/Spacer';
 
 class LogsScreen extends React.Component {
 	static navigationOptions = {
@@ -15,7 +16,9 @@ class LogsScreen extends React.Component {
 			return (
 				<ListItem key={log.id}>
 					<Body>
-						<Text>Log #{index}</Text>
+						<StyledText size="med" text={'Log #' + index} />
+						<Spacer size={10} />
+						<StyledText size="xsmall" text={new Date(log.timestamp).toISOString()} />
 					</Body>
 				</ListItem>
 			)

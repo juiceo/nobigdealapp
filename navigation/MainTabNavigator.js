@@ -56,7 +56,6 @@ SettingsStack.navigationOptions = {
 export default createBottomTabNavigator({
   HomeStack,
   LogsStack,
-  SettingsStack,
 }, {
     headerMode: 'none'
   })
