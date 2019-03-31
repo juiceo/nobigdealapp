@@ -1,3 +1,5 @@
+![logo](https://i.imgur.com/dXm1IMt.png)
+
 # No Big Deal -app
 
 A sexual health app created for Nordic Health Hackathon 2019, Helsinki
