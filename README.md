@@ -1,6 +1,6 @@
 # No Big Deal -app
 
-An sexual health app created for Nordic Health Hackathon 2019, Helsinki
+A sexual health app created for Nordic Health Hackathon 2019, Helsinki
 
 Discreetly deal with delicate issues like ordering STI treatments or contraception. 
 Anonymously tell your past partners of possible infections. 
@@ -109,10 +109,17 @@ After this, the app sends text messages to all of our user's saved partners that
 
 Done!
 
+## Designs
+https://imgur.com/d9P3cfw <br>
+https://imgur.com/Khi02dG <br>
+https://imgur.com/U74ZLvO <br>
+https://imgur.com/JmSeuMJ <br>
+
+
 ## Authors
-Paula Laitinen
-Juuso Lappalainen
-Natasha Overell
-Jesse Palo
+Paula Laitinen <br>
+Juuso Lappalainen <br>
+Natasha Overell <br>
+Jesse Palo <br>
 
 
