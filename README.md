@@ -2,32 +2,36 @@
 
 A sexual health app created for Nordic Health Hackathon 2019, Helsinki
 
-Discreetly deal with delicate issues like ordering STI treatments or contraception. 
-Anonymously tell your past partners of possible infections. 
-Find the help you need with a single click.
-
+- Discreetly deal with delicate issues like ordering STI treatments or contraception. 
+- Get useful information about STI's and their treatment
+- Anonymously tell your past partners of possible infections. 
+- Find the help you need with a single click.
 
 ## Technologies used
 
-```
-React native
-Twilio SMS API
-Digi.me SDK
-```
+- React Native (Expo)
+- Twilio SMS API
+- Digi.me SDK
+
+Note, the use of the Digi.me SDK was mocked in the app, as Digi.me doesn't currently have mock data for Health records.
+
+## Design
+
+![one](https://i.imgur.com/d9P3cfw.jpg)
+![two](https://i.imgur.com/Khi02dG.jpg)
+![three](https://i.imgur.com/U74ZLvO.jpg)
+![four](https://i.imgur.com/JmSeuMJ.jpg)
 
 ## Try it out
 
 Here are instructions on how to try it out on your Android device.
-Unfortunately Expo Client currently does not work properly on iOS devices,
+Unfortunately Expo Client for previewing apps currently does not work properly on iOS devices due to restrictions by Apple,
 limiting the choices for trying our app out!
 
 ### Prerequisites
 
-```
-Android device
-Expo app for Android https://play.google.com/store/apps/details?id=host.exp.exponent&hl=en
-Expo account
-```
+- Android device
+- [Expo app for Android](https://play.google.com/store/apps/details?id=host.exp.exponent&hl=en) 
 
 ### Test on Android
 
@@ -41,8 +45,6 @@ While we did create some alternative paths, we suggest you try the demoed use ca
 
 To reset the demo, scroll all the way down and press 'Reset demo'. Connect your digi.me account.
 You can then for example press 'Status' and see that you are infection free.
-
-
 
 ### To start the demo flow:
 
@@ -108,13 +110,6 @@ After this, the app sends text messages to all of our user's saved partners that
 ^NOTE! We've disabled this feature because the Twilio trial account only allows sending messages to verified numbers
 
 Done!
-
-## Designs
-https://imgur.com/d9P3cfw <br>
-https://imgur.com/Khi02dG <br>
-https://imgur.com/U74ZLvO <br>
-https://imgur.com/JmSeuMJ <br>
-
 
 ## Authors
 Paula Laitinen <br>
