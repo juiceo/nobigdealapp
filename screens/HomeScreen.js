@@ -22,6 +22,7 @@ import StyledText from '../components/StyledText'
 import ScreenTitle from '../components/ScreenTitle';
 import Spacer from '../components/Spacer';
 import Button from '../components/Button';
+import AppLogo from '../components/AppLogo';
 
 import send from '../services/TwilioService';
 
@@ -35,6 +36,8 @@ class HomeScreen extends React.Component {
 
     this.state = {
       digimeLoading: false,
+      showDiagnosis: false,
+      showClean: false,
     }
 
     this.newActivity = this.newActivity.bind(this)
@@ -49,7 +52,12 @@ class HomeScreen extends React.Component {
   }
 
   latestDiagnosis = () => {
-    this.props.navigation.navigate('LatestDiagnosis', { disease: 'Chlamydia' })
+    if (this.state.showDiagnosis) {
+      this.props.navigation.navigate('LatestDiagnosis', { disease: 'Chlamydia' })
+    }
+    else {
+      this.props.navigation.navigate('DiagnosisClean')
+    }
   }
 
   connectDigime = () => {
@@ -96,29 +104,39 @@ class HomeScreen extends React.Component {
 
   renderNormal() {
 
-    const { testResults, appointmentBooked, prescriptionAvailable } = this.props;
-
-    const fitbitData = true
+    const { testResults, appointmentBooked, prescriptionAvailable, fitbitData } = this.props;
 
     return (
       <React.Fragment>
         <Spacer size={20} />
         {fitbitData ? (
-          <View>
-            <StyledText text="fitbit data here" />
-          </View>
+          <React.Fragment>
+            <TouchableOpacity onPress={this.checkUp}>
+              <View style={s.fitbitBlock}>
+                <Image source={require('../assets/images/fitbit.png')} style={s.fitbitLogo} />
+                <View style={s.fitbitContent}>
+                  <StyledText text="Elevated heart rate" size="small" color={Colors.highlight} align="left" />
+                  <Spacer size={10} />
+                  <StyledText text="Your heart rate has been higher than normal lately - everything ok?" size="xsmall" align="left" />
+                </View>
+              </View>
+            </TouchableOpacity>
+            <Spacer size={20} />
+          </React.Fragment>
         ) : null}
         {testResults || appointmentBooked ? (
           <View style={s.card}>
             {this.props.appointmentBooked ? (
-              <View style={s.cardItem}>
-                <View style={s.cardItemLeft}>
-                  <StyledText text="Reminder" size="xsmall" color={Colors.purple} align="left" />
+              <TouchableOpacity onPress={() => this.setState({ showDiagnosis: true })}>
+                <View style={s.cardItem}>
+                  <View style={s.cardItemLeft}>
+                    <StyledText text="Reminder" size="xsmall" color={Colors.purple} align="left" />
+                  </View>
+                  <View style={s.cardItemRight}>
+                    <StyledText text="Upcoming doctor's appointment" size="small" align="left" />
+                  </View>
                 </View>
-                <View style={s.cardItemRight}>
-                  <StyledText text="Upcoming doctor appointment" size="small" align="left" />
-                </View>
-              </View>
+              </TouchableOpacity>
             ) : null}
             {this.props.testResults ? (
               <View style={s.cardItem}>
@@ -134,7 +152,7 @@ class HomeScreen extends React.Component {
         ) : null}
         <Spacer size={20} />
         <View style={s.buttonRow}>
-          <TouchableOpacity style={{ flex: 1 }} onPress={this.checkUp}>
+          <TouchableOpacity style={{ flex: 1 }}>
             <View style={s.button}>
               <Image style={s.buttonImage} source={require('../assets/images/group12.png')} />
               <Spacer size={10} />
@@ -180,6 +198,7 @@ class HomeScreen extends React.Component {
           colors={['rgb(255,255,255)', 'rgb(255,255,255)']}
           style={{ flex: 1 }}>
           <Content style={s.wrapper}>
+            <AppLogo isLight={false} right={-10} />
             <Spacer size={60} />
             <StyledText text="Hello Anna!" size="xlarge" color={Colors.blue} align="left" />
             <StyledText text="Last visit 22.3.2019" size="xsmall" align="left" />
@@ -257,6 +276,21 @@ const s = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
     flexDirection: 'column',
+  },
+  fitbitIcon: {
+    width: 50,
+  },
+  fitbitBlock: {
+    padding: 15,
+    borderColor: Colors.blue,
+    borderWidth: 1,
+    borderRadius: 10,
+    flexDirection: 'row'
+  },
+  fitbitContent: {
+    paddingLeft: 15,
+    flexDirection: 'column',
+    flex: 1,
   }
 })
 
@@ -265,6 +299,7 @@ const mapStateToProps = (state) => ({
   testResults: state.digime.testResults,
   appointmentBooked: state.digime.appointment,
   prescriptionAvailable: state.digime.prescription,
+  fitbitData: state.digime.fitbitData,
 })
 
 const mapDispatchToProps = (dispatch) => ({

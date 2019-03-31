@@ -6,12 +6,14 @@ import _ from 'lodash';
 import { Container, Content, Item, Label, Input } from 'native-base';
 
 import * as LogActions from '../../redux/logs/actions';
+import * as DigimeActions from '../../redux/digime/actions';
 import TextRadioButtons from '../../components/TextRadioButtons'
 import ScreenTitle from '../../components/ScreenTitle'
 import Spacer from '../../components/Spacer'
 import Button from '../../components/Button'
 import StyledText from '../../components/StyledText';
 import Colors from '../../constants/Colors';
+import AppLogo from '../../components/AppLogo';
 
 class NewActivityHome extends React.Component {
 	constructor(props) {
@@ -29,6 +31,7 @@ class NewActivityHome extends React.Component {
 	}
 
 	onSubmit() {
+		this.props.setFitbitData();
 		this.props.saveNewLog(_.pick(this.state, ['condomUsed', 'birthControl', 'types', 'phoneNumber']));
 
 		if (this.state.condomUsed !== 'yes' && this.state.birthControl !== 'yes') {
@@ -171,7 +174,8 @@ const mapStateToProps = (state) => ({
 })
 
 const mapDispatchToProps = (dispatch) => ({
-	saveNewLog: (data) => dispatch(LogActions.saveNewLog(data))
+	saveNewLog: (data) => dispatch(LogActions.saveNewLog(data)),
+	setFitbitData: () => dispatch(DigimeActions.setFitbitData())
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(NewActivityHome)

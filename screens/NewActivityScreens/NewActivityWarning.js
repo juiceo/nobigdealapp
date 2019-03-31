@@ -11,6 +11,7 @@ import Spacer from '../../components/Spacer'
 import ScreenTitle from '../../components/ScreenTitle'
 import Button from '../../components/Button'
 import StyledText from '../../components/StyledText'
+import AppLogo from '../../components/AppLogo';
 
 import * as DigimeActions from '../../redux/digime/actions';
 
@@ -32,7 +33,7 @@ const NewActivityWarning = (props) => {
 	return (
 		<Container>
 			<LinearGradient
-				colors={['rgb(255,127,80)', 'rgb(27,14,142)']}
+				colors={['rgb(164,119,255)', 'rgb(27,14,142)']}
 				style={{ flex: 1 }}
 			>
 				<Content contentContainerStyle={s.wrapper}>

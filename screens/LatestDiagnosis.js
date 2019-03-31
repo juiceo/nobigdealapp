@@ -17,6 +17,10 @@ export default LatestDiagnosis = (props) => {
 		props.navigation.pop()
 	}
 
+	function informPartners() {
+		props.navigation.navigate('InformPartners');
+	}
+
 	const { disease } = props.navigation.state.params
 
 	return (
@@ -46,7 +50,7 @@ export default LatestDiagnosis = (props) => {
 						<Spacer size={10} />
 						<StyledText size="small" text="Don't let it spread! Informing your partners is the right thing to do. Click below to do it anonymously." />
 						<Spacer size={10} />
-						<Button type="text" text="Inform partners"></Button>
+						<Button type="text" text="Inform partners" onPress={informPartners}></Button>
 					</View>
 					<Spacer size={20}></Spacer>
 					<Button fullWidth text="Done" type="text" onPress={dismiss} />

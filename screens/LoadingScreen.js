@@ -25,6 +25,15 @@ class LoadingScreen extends React.Component {
 		}.bind(this), 2000)
 	}
 
+	onClose() {
+		const { onClose } = this.props.navigation.state.params;
+		if (onClose) {
+			onClose(this.props.navigation)
+		} else {
+			this.props.navigation.dismiss()
+		}
+	}
+
 	render() {
 
 		const { loadingText, doneText, doneSubtitle } = this.props.navigation.state.params
@@ -49,7 +58,7 @@ class LoadingScreen extends React.Component {
 									<Spacer size={20} />
 									<StyledText text={doneSubtitle} color={Colors.white} />
 									<Spacer size={20} />
-									<Button text="Close" onPress={() => this.props.navigation.dismiss()} />
+									<Button text="Close" onPress={() => this.onClose()} />
 								</React.Fragment>
 							)}
 					</Content>

@@ -11,6 +11,8 @@ import CheckUpDone from '../screens/CheckUpScreens/CheckUpDone';
 import CheckUpSymptoms from '../screens/CheckUpScreens/CheckUpSymptoms';
 import CheckUpSymptomsTwo from '../screens/CheckUpScreens/CheckUpSymptomsTwo';
 import LatestDiagnosisScreen from '../screens/LatestDiagnosis';
+import InformPartnersScreen from '../screens/InformPartners';
+import DiagnosisCleanScreen from '../screens/DiagnosisClean';
 import LoadingScreen from '../screens/LoadingScreen';
 
 const NewActivityStack = createStackNavigator({
@@ -43,6 +45,9 @@ export default createAppContainer(createStackNavigator({
   CheckUp: CheckUpStack,
   NewActivity: NewActivityStack,
   LatestDiagnosis: LatestDiagnosisScreen,
+  InformPartners: InformPartnersScreen,
+  InformPartnersDone: LoadingScreen,
+  DiagnosisClean: DiagnosisCleanScreen,
 },
   {
     headerMode: 'none',

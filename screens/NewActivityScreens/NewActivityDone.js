@@ -8,6 +8,7 @@ import Spacer from '../../components/Spacer'
 import Button from '../../components/Button'
 import StyledText from '../../components/StyledText';
 import Colors from '../../constants/Colors';
+import AppLogo from '../../components/AppLogo';
 
 const NewActivityDone = (props) => {
 
@@ -18,7 +19,7 @@ const NewActivityDone = (props) => {
 	return (
 		<Container>
 			<LinearGradient
-				colors={['rgb(50,205,50)', 'rgb(27,14,142)']}
+				colors={['rgb(164,119,255)', 'rgb(27,14,142)']}
 				style={{ flex: 1 }}
 			>
 				<Content contentContainerStyle={s.submittedWrapper}>

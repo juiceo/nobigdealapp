@@ -34,6 +34,12 @@ export default function reducer(state = initialState, action) {
 				connected: true,
 			}
 		}
+		case ActionTypes.SET_FITBIT_DATA: {
+			return {
+				...state,
+				fitbitData: true,
+			}
+		}
 		case 'RESET_STORE': {
 			return initialState;
 		}
