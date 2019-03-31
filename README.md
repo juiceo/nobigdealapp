@@ -1,6 +1,6 @@
 # No Big Deal -app
 
-An sexual health app created for Nordic Health Hackathon 2019, Helsinki
+A sexual health app created for Nordic Health Hackathon 2019, Helsinki
 
 Discreetly deal with delicate issues like ordering STI treatments or contraception. 
 Anonymously tell your past partners of possible infections. 
