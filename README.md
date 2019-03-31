@@ -109,10 +109,17 @@ After this, the app sends text messages to all of our user's saved partners that
 
 Done!
 
+## Designs
+https://imgur.com/d9P3cfw
+https://imgur.com/Khi02dG
+https://imgur.com/U74ZLvO
+https://imgur.com/JmSeuMJ
+
+
 ## Authors
-Paula Laitinen
-Juuso Lappalainen
-Natasha Overell
-Jesse Palo
+Paula Laitinen 
+Juuso Lappalainen 
+Natasha Overell 
+Jesse Palo 
 
 
