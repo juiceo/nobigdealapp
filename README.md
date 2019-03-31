@@ -15,7 +15,15 @@ A sexual health app created for Nordic Health Hackathon 2019, Helsinki
 
 Note, the use of the Digi.me SDK was mocked in the app, as Digi.me doesn't currently have mock data for Health records.
 
-## Design
+## In action
+
+See the attached gifs for a preview of how the app looks in action!
+
+https://i.imgur.com/UHFk50K.gifv
+
+https://i.imgur.com/Tzs03NL.gifv
+
+## Designs
 
 ![one](https://i.imgur.com/d9P3cfw.jpg)
 ![two](https://i.imgur.com/Khi02dG.jpg)
